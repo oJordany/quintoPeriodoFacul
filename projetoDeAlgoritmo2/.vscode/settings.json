@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        ".env.*": "env",
+        ".env": "env",
+        "iostream": "cpp",
+        "ostream": "cpp"
+    }
+}
