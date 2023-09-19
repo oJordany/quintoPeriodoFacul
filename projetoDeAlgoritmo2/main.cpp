@@ -15,8 +15,8 @@ int main()
     chaves[4] = 20;
     chaves[5] = 40;
     chaves[6] = 80;
-    chaves[7] = 39;
-    chaves[8] = 21;
+    chaves[7] = 90;
+    chaves[8] = 91;
 
     arvore = cria_arvore();
 
@@ -24,11 +24,12 @@ int main()
     {
         cout << "inserindo nodo " << chaves[i] << endl;
         insere_elemento(arvore, chaves[i]);
-        cout << "nova altura: "<< get_altura_arvore(arvore) << endl;
+        // cout << "nova altura: "<< get_altura_arvore(arvore) << endl;
     }
 
-    // printa_arvore(arvore, 0);
-    printa_arvore2(arvore, "", true);
+    printa_arvore(arvore, 0);
+
+    cout << arvore->FB;
 
     free(chaves);
 

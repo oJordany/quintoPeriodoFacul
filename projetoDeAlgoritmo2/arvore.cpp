@@ -47,6 +47,7 @@ void insere_elemento(struct arvore *t, int D)
             struct arvore *novo = cria_arvore();
             novo->dado = D;
             novo->altura = 0;
+            novo->FB = 0;
             t->esq = novo;
         }
     }
@@ -54,6 +55,49 @@ void insere_elemento(struct arvore *t, int D)
     {
         if (t->dir){
             insere_elemento(t->dir, D);
+        }else
+        {
+            struct arvore *novo = cria_arvore();
+            novo->dado = D;
+            novo->altura = 0;
+            novo->FB = 0;
+            t->dir = novo;
+        }
+    }
+    else
+    {
+        cout << "Elementos iguais\n";
+    }
+    int alturaArvoreEsquerda = get_altura_arvore(t->esq);
+    int alturaArvoreDireita = get_altura_arvore(t->dir);
+    t->altura = 1 + max(alturaArvoreEsquerda, alturaArvoreDireita);
+    t->FB = (alturaArvoreEsquerda + 1) - (alturaArvoreDireita + 1);
+}
+
+void insere_elemento_AVL(struct arvore *t, int D)
+{
+    if (t->altura == -1)
+    {   
+        t->dado = D;
+        t->altura = 0;
+        return;
+    }
+    if (D < t->dado)
+    {
+        if (t->esq){
+            insere_elemento_AVL(t->esq, D);
+        }else
+        { /* Achou a inserção*/
+            struct arvore *novo = cria_arvore();
+            novo->dado = D;
+            novo->altura = 0;
+            t->esq = novo;
+        }
+    }
+    else if (D > t->dado)
+    {
+        if (t->dir){
+            insere_elemento_AVL(t->dir, D);
         }else
         {
             struct arvore *novo = cria_arvore();
