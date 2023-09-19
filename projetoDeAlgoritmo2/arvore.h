@@ -13,6 +13,6 @@ struct arvore *cria_arvore(void);
 
 void insere_elemento(struct arvore *, int);
 
-void printa_arvore(struct arvore *, string="", bool=false);
+void printa_arvore(struct arvore *, int);
 
 int get_altura_arvore(struct arvore *);

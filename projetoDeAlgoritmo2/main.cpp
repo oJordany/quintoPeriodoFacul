@@ -15,21 +15,22 @@ int main()
     chaves[4] = 20;
     chaves[5] = 40;
     chaves[6] = 80;
-    chaves[7] = 90;
-    chaves[8] = 91;
+    chaves[7] = 39;
+    chaves[8] = 21;
 
     arvore = cria_arvore();
 
     for (int i = 0; i < 9; i++)
     {
-        cout << get_altura_arvore(arvore) << endl;
+        cout << "inserindo nodo " << chaves[i] << endl;
         insere_elemento(arvore, chaves[i]);
+        cout << "nova altura: "<< get_altura_arvore(arvore) << endl;
     }
 
-    cout << get_altura_arvore(arvore) << endl;
-    cout << arvore->dado << endl;
-    cout << arvore->dir->dir->altura << endl;
-    // printa_arvore(arvore);
+    // printa_arvore(arvore, 0);
+    printa_arvore2(arvore, "", true);
 
     free(chaves);
+
+    return 0;
 }

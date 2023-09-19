@@ -26,35 +26,28 @@ int get_altura_arvore(struct arvore *t){
     int alturaEsquerda = get_altura_arvore(t->esq);
     int alturaDireita = get_altura_arvore(t->dir);
 
+
     return 1 + max(alturaEsquerda, alturaDireita);
 }
 
 void insere_elemento(struct arvore *t, int D)
 {
-    if (get_altura_arvore(t) == -1)
+    if (t->altura == -1)
     {   
-        cout << "Reinicializou com " << D << endl;
         t->dado = D;
         t->altura = 0;
         return;
     }
     if (D < t->dado)
     {
-        cout <<  "passou: ";
         if (t->esq){
             insere_elemento(t->esq, D);
         }else
         { /* Achou a inserção*/
             struct arvore *novo = cria_arvore();
-            cout << "Inserindo (esquerda): " << D << "\n";
             novo->dado = D;
-            int alturaAnterior = t->altura;
+            novo->altura = 0;
             t->esq = novo;
-            // if (t->dir)  t->dir->altura -= 1;
-            int alturaAtual = get_altura_arvore(t); 
-            // if (t->dir) t->dir->altura += 1;
-            alturaAnterior < alturaAtual ? t->altura += 1 : t->altura = t->altura;
-            novo->altura = alturaAtual;
         }
     }
     else if (D > t->dado)
@@ -64,39 +57,38 @@ void insere_elemento(struct arvore *t, int D)
         }else
         {
             struct arvore *novo = cria_arvore();
-            cout << "Inserindo (direita): " << D << "\n";
             novo->dado = D;
-            int alturaAnterior = t->altura;
+            novo->altura = 0;
             t->dir = novo;
-            // if (t->esq)  t->esq->altura -= 1;
-            int alturaAtual = get_altura_arvore(t); 
-            // if (t->esq->altura) t->esq->altura += 1;
-            alturaAnterior < alturaAtual ? t->altura += 1 : t->altura = t->altura;
-            novo->altura = alturaAtual;
         }
     }
     else
     {
-        cout << "elemento ja existe na arvore\n";
+        cout << "Elementos iguais\n";
     }
+    t->altura = 1 + max(get_altura_arvore(t->esq), get_altura_arvore(t->dir));
 }
 
-void printa_arvore(struct arvore *t, string prefixo, bool esq)
+void printa_arvore(struct arvore *t, int espaco)
 {
-    if(get_altura_arvore(t) == 0) return;
-
-    cout << prefixo << (esq ? "├── ": "└── ") << t->dado << "\n";
+    // Caso base
+    if (t == NULL)
+        return;
     
-    if (t->esq && t->dir){
-        printa_arvore(t->dir, prefixo + (esq ? "|   " : "    "), esq=true);
-        printa_arvore(t->esq, prefixo + (esq ? "    " : "|   "), esq=false);
-    }
-    else if (t->dir){
-        printa_arvore(t->dir, prefixo + (esq ? "|   " : "    "), esq=false);
-    }
-    else if (t->esq){
-        printa_arvore(t->esq, prefixo + (esq ? "|   " : "    "), esq=true);
-    }
+    // Aumenta a distância entre os níveis
+    espaco += 5;
+
+    // Processa o filho direito primeiro
+    printa_arvore(t->dir, espaco);
+
+    // Imprime o nó atual
+    cout << endl;
+    for (int i = 5; i < espaco; i++)
+        cout << " ";
+    cout << t->dado << "\n";
+
+    // Processa o filho esquerdo
+    printa_arvore(t->esq, espaco);
 }
 
 // ↘ ↙
