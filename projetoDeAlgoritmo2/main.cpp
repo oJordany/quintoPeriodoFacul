@@ -24,15 +24,9 @@ int main()
     {
         cout << "inserindo nodo " << chaves[i] << endl;
         insere_elemento(arvore, chaves[i]);
-        // cout << "nova altura: "<< get_altura_arvore(arvore) << endl;
     }
 
-    // printa_arvore(arvore, 0);
-
-    // cout << "\n" << arvore->altura;
     printa_arvore(arvore);
-
-    // Arv u = rotacao_simples_esquerda(arvore->dir->dir);
 
     free(chaves);
 
