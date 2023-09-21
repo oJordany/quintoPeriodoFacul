@@ -62,9 +62,9 @@ Arv balancear(Arv t){
     int fb = get_fator_de_balanceamento(t);
 
     /* Rotacão simples à esquerda */
-    if (fb < -1 && get_fator_de_balanceamento(t->dir) <= 0)
+    if (fb < -1 && get_fator_de_balanceamento(t->dir) <= 0){
         t = rotacao_simples_esquerda(t);
-    
+    }
     
     /* Rotacão simples à direita */
     else if (fb > 1 && get_fator_de_balanceamento(t->esq) >= 0)
@@ -89,7 +89,7 @@ int get_altura_arvore(Arv t){
     return t->altura;
 }
 
-void insere_elemento(Arv t, int D)
+void insere_elemento(Arv &t, int D)
 {
 
     if (t->altura == -1)
@@ -133,8 +133,7 @@ void insere_elemento(Arv t, int D)
     t->altura = 1 + max(alturaArvoreEsquerda, alturaArvoreDireita);
 
     t = balancear(t);
-    
-    // return t;
+
 }
 
 int get_fator_de_balanceamento(Arv t){

@@ -17,7 +17,7 @@ struct arvore
 
 struct arvore *cria_arvore(void);
 
-void insere_elemento(struct arvore *, int);
+void insere_elemento(Arv &, int);
 
 void printa_arvore(struct arvore *, int = 0);
 
