@@ -4,7 +4,7 @@ using namespace std;
 typedef int 
     tipo_elem;
 
-typedef struct arv
+typedef struct arvore
     *Arv;
 
 struct arvore
@@ -13,17 +13,24 @@ struct arvore
     struct arvore *dir;
     tipo_elem dado;
     int altura;
-    int FB;
 };
 
 struct arvore *cria_arvore(void);
 
 void insere_elemento(struct arvore *, int);
 
-void printa_arvore(struct arvore *, int);
+void printa_arvore(struct arvore *, int = 0);
+
+int get_fator_de_balanceamento(Arv);
 
 int get_altura_arvore(struct arvore *);
 
-int get_altura_esquerda(struct arvore *t);
+Arv rotacao_simples_esquerda(Arv);
 
-int get_altura_direita(struct arvore *t);
+Arv rotacao_simples_direita(Arv);
+
+Arv rotacao_dupla_esquerda(Arv);
+
+Arv rotacao_dupla_direita(Arv);
+
+Arv balancear(Arv);
