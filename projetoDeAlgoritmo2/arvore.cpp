@@ -176,3 +176,47 @@ nó com 2 filhos -> Se o filho à direita não possui subárvore esquerda,é ele
                 -> a estratégia geral (Mark Allen Weiss) é sempre substituir a chave retirada pela menor chave da subárvore direita.
 
 */
+
+void remove_elemento(Arv &t, int D){
+    if (t == NULL){
+        cout << "Valor nao encontrado!\n";
+    }else{ // procura o nó que se deseja remover
+        if (t->dado == D){
+            // remove nó folha (nó sem filho)
+            if (t->esq == NULL && t->dir == NULL){
+                free(t);
+                t = NULL;
+                cout << "Elemento removido: " << D << "\n";
+            }else{
+                // remove nó que possui 2 filhos
+                if (t->esq != NULL && t->dir != NULL){
+                    Arv aux = t->dir;
+                    while (aux->esq != NULL)
+                        aux = aux->esq;
+                    t->dado = aux->dado;
+                    aux->dado = D;
+                    cout << "Elemento trocado: " << D << " ↔ " << t->dado << "\n";
+                    remove_elemento(t->dir, D);
+                }else{
+                    // remove nó que possui apenas 1 filho
+                    if (t->esq != NULL)
+                        t = t->esq;
+                    else
+                        t = t->dir;
+                }
+            }
+        }else{
+            if (D < t->dado)
+                remove_elemento(t->esq, D);
+            else
+                remove_elemento(t->dir, D);
+        }
+    }
+    if (t){
+        // recalcula a altura
+        t->altura = max(get_altura_arvore(t->esq), get_altura_arvore(t->dir)) + 1;
+
+        // Verifica a necessidade de rebalancear a árvore
+        t = balancear(t);
+    }
+}

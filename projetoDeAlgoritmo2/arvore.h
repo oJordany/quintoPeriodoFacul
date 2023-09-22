@@ -19,6 +19,8 @@ struct arvore *cria_arvore(void);
 
 void insere_elemento(Arv &, int);
 
+void remove_elemento(Arv &, int);
+
 void printa_arvore(struct arvore *, int = 0);
 
 int get_fator_de_balanceamento(Arv);

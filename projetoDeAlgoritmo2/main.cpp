@@ -30,5 +30,9 @@ int main()
 
     free(chaves);
 
+    remove_elemento(arvore, 91);
+
+    printa_arvore(arvore);
+
     return 0;
 }
