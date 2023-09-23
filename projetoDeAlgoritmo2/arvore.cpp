@@ -147,9 +147,10 @@ int get_fator_de_balanceamento(Arv t){
 void printa_arvore(Arv t, int espaco)
 {
     // Caso base
-    if (t == NULL)
+    if (t == NULL){
         return;
-    
+    }
+
     // Aumenta a distância entre os níveis
     espaco += 5;
 
