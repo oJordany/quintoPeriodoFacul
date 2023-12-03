@@ -20,4 +20,4 @@ def plotGraph(nameFile):
     plt.grid()
     plt.show()
      
-plotGraph("resultados.json")
+plotGraph("analiseAssintoticaBuscaBinaria.json")

@@ -64,27 +64,32 @@ def binarySearchRecursive(lista_de_numeros, primeiro_indice, ultimo_indice, valo
             
 def analisarAssintoticamente():
     MAX_SIZE = 10**7 + 900000
-    size = 10    
-    results = {"Algoritmo recursivo":[],  "Algoritmo iterativo": []}    
+    size = 10
+    results = {"Algoritmo recursivo": [],  "Algoritmo iterativo": []}
+
     while size < MAX_SIZE:
         randomValues = np.random.choice(np.arange(0, 10**8), size=size, replace=False)
         orderedList = np.sort(randomValues)
         searchedValueIndex = -1
         searchedValue = orderedList[searchedValueIndex]
-        # print(f"Lista: {orderedList}")
-        # print(f"Elemento Procurado: {searchedValue}")
-        recursiveExecutionTime = timeit.timeit(lambda: binarySearchRecursive(orderedList, 0, size - 1, searchedValue), number=500000)
-        iterativeExecutionTime = timeit.timeit(lambda: binarySearchIterative(orderedList, searchedValue), number=500000)
 
-        if size >= 1000 and size < 10000:
-            size += 1000
-        else:
-            size *= 10 
-        print(size)
+        recursiveExecutionTime = time.process_time()
+        binarySearchRecursive(orderedList, 0, size - 1, searchedValue)
+        recursiveExecutionTime = time.process_time() - recursiveExecutionTime
+
+        iterativeExecutionTime = time.process_time()
+        binarySearchIterative(orderedList, searchedValue)
+        iterativeExecutionTime = time.process_time() - iterativeExecutionTime
+
         results["Algoritmo recursivo"].append([size, recursiveExecutionTime])
         results["Algoritmo iterativo"].append([size, iterativeExecutionTime])
 
-    with open("analiseAssintoticaBuscaBinaria.json", "w", encoding="utf-8") as file:
+        if size < 10000:
+            size *= 2
+        else: 
+            size += 10000
+
+    with open("analiseAssintoticaBuscaBinaria_2.json", "w", encoding="utf-8") as file:
         json.dump(results, file, indent=4)
 
 analisarAssintoticamente()
